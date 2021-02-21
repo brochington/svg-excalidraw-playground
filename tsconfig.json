@@ -9,8 +9,21 @@
     "noEmit": true,
     "strict": true,
     "esModuleInterop": true,
+    "jsx": "react",
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "types/*": ["src/types/*"],
+      "styles": ["src/styles/*"],
+      "components/*": ["src/components/*"],
+      "pages/*": ["src/pages/*"],
+      "actions/*": ["src/actions/*"],
+      "actions": ["src/actions/index.ts"],
+      "contexts/*": ["src/contexts/*"],
+      "utils/*": ["src/utils/*"],
+      "constants/*": ["src/constants/*"],
+      "services/*": ["src/services/*"],
+      "hooks/*": ["src/client/hooks/*"]
+    }
   },
   "include": ["src", "svg-to-excalidraw.d.ts"],
   "exclude": ["src/test"]

@@ -1,8 +1,7 @@
 const path = require('path');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
-const aliases = {};
+const aliases = require('./aliases');
 
 const babelLoaderConfig = {
   loader: 'babel-loader',
@@ -11,13 +10,15 @@ const babelLoaderConfig = {
       '@babel/plugin-syntax-dynamic-import',
       '@babel/plugin-proposal-class-properties',
       '@babel/plugin-proposal-object-rest-spread',
+      '@babel/plugin-proposal-optional-chaining',
+      '@babel/plugin-proposal-nullish-coalescing-operator',
     ],
-    presets: ['@babel/typescript'],
+    presets: ['@babel/preset-react', '@babel/typescript'],
   },
 };
 
 const config = {
-  entry: [path.join(process.cwd(), 'src/index.ts')],
+  entry: [path.join(process.cwd(), 'src/index.tsx')],
   output: {
     filename: 'bundle.js',
     path: path.resolve(process.cwd(), 'dev_build'),
@@ -41,10 +42,24 @@ const config = {
         include: path.join(process.cwd(), 'src'),
         use: [babelLoaderConfig],
       },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          { loader: 'css-loader', options: { importLoaders: 1 } },
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /\.ttf$/,
+        use: ['file-loader'],
+      },
     ],
   },
   plugins: [
-    new MonacoWebpackPlugin(),
+    new MonacoWebpackPlugin({
+      languages: ['html', 'json'],
+    }),
     new HtmlWebpackPlugin({
       title: 'SVG Excalidraw Playground',
       template: path.join(__dirname, 'indexTemplate.html'),
@@ -52,19 +67,4 @@ const config = {
   ],
 };
 
-// const esmConfig = {
-//   ...baseConfig,
-//   output: {
-//     filename: 'esm-bundle.js',
-//     path: path.resolve(process.cwd(), 'dist'),
-//     libraryTarget: 'module',
-//     umdNamedDefine: true,
-//     module: true,
-//   },
-//   experiments: {
-//     outputModule: true,
-//   },
-// };
-
 module.exports = config;
-// module.exports = [umdConfig, esmConfig];
