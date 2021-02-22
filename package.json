@@ -5,10 +5,8 @@
   "main": "dist/index.html",
   "scripts": {
     "clean": "rimraf dist",
-    "dev:clean": "rimraf dev_build",
-    "dist:build": "npm run clean && webpack --config config/webpack.config.dist.js",
-    "dev:build": "npm run dev:clean && webpack --config config/webpack.config.dev.js --watch",
-    "dev:serve": "serve dev_build",
+    "build:dist": "npm run clean && webpack --config config/webpack.config.dist.js",
+    "dev": "NODE_ENV=development node ./src/server/server.dev.js",
     "lint": "eslint .",
     "check-types": "tsc",
     "prettier:check": "prettier --check .",
@@ -22,7 +20,8 @@
     "monaco-editor-webpack-plugin": "^3.0.0",
     "postcss-loader": "^5.0.0",
     "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "react-dom": "^17.0.1",
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.17",
@@ -35,8 +34,10 @@
     "@commitlint/cli": "11.0.0",
     "@commitlint/config-conventional": "11.0.0",
     "@commitlint/prompt-cli": "11.0.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.4.3",
     "@types/react": "^17.0.2",
     "@types/react-dom": "^17.0.1",
+    "@types/react-router-dom": "^5.1.7",
     "@typescript-eslint/eslint-plugin": "^4.15.1",
     "@typescript-eslint/parser": "^4.15.1",
     "autoprefixer": "^10.2.4",
@@ -49,19 +50,22 @@
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-node": "11.1.0",
     "eslint-plugin-promise": "4.3.1",
+    "express": "^4.17.1",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.2.0",
     "husky": "5.0.9",
     "postcss": "^8.2.6",
     "prettier": "2.2.1",
+    "react-refresh": "^0.9.0",
     "rimraf": "^3.0.2",
     "sass": "^1.32.8",
     "sass-loader": "^11.0.1",
-    "serve": "^11.3.2",
     "style-loader": "^2.0.0",
     "tailwindcss": "^2.0.3",
     "typescript": "^4.1.5",
     "webpack": "^5.23.0",
-    "webpack-cli": "^4.5.0"
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-middleware": "^4.1.0",
+    "webpack-hot-middleware": "^2.25.0"
   }
 }

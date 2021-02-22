@@ -16,7 +16,7 @@ const Monaco: React.FC = () => {
     <div>
       <div style={{ width: '50vw', height: '100vh' }} ref={monacoRef} />
     </div>
-  )
-}
+  );
+};
 
 export default Monaco;

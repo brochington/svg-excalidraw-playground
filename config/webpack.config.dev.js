@@ -1,6 +1,7 @@
 const path = require('path');
+const webpack = require('webpack');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const aliases = require('./aliases');
 
 const babelLoaderConfig = {
@@ -12,17 +13,21 @@ const babelLoaderConfig = {
       '@babel/plugin-proposal-object-rest-spread',
       '@babel/plugin-proposal-optional-chaining',
       '@babel/plugin-proposal-nullish-coalescing-operator',
+      'react-refresh/babel',
     ],
     presets: ['@babel/preset-react', '@babel/typescript'],
   },
 };
 
 const config = {
-  entry: [path.join(process.cwd(), 'src/index.tsx')],
+  entry: [
+    'webpack-hot-middleware/client',
+    path.join(process.cwd(), 'src/client/index.tsx'),
+  ],
   output: {
     filename: 'bundle.js',
     path: path.resolve(process.cwd(), 'dev_build'),
-    umdNamedDefine: true,
+    publicPath: '/static/',
   },
   mode: 'development',
   devtool: 'eval-source-map',
@@ -57,12 +62,10 @@ const config = {
     ],
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
+    new ReactRefreshWebpackPlugin(),
     new MonacoWebpackPlugin({
       languages: ['html', 'json'],
-    }),
-    new HtmlWebpackPlugin({
-      title: 'SVG Excalidraw Playground',
-      template: path.join(__dirname, 'indexTemplate.html'),
     }),
   ],
 };

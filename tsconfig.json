@@ -12,19 +12,19 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "types/*": ["src/types/*"],
-      "styles": ["src/styles/*"],
-      "components/*": ["src/components/*"],
-      "pages/*": ["src/pages/*"],
-      "actions/*": ["src/actions/*"],
-      "actions": ["src/actions/index.ts"],
-      "contexts/*": ["src/contexts/*"],
-      "utils/*": ["src/utils/*"],
-      "constants/*": ["src/constants/*"],
-      "services/*": ["src/services/*"],
+      "types/*": ["src/client/types/*"],
+      "styles": ["src/client/styles/*"],
+      "components/*": ["src/client/components/*"],
+      "pages/*": ["src/client/pages/*"],
+      "actions/*": ["src/client/actions/*"],
+      "actions": ["src/client/actions/index.ts"],
+      "contexts/*": ["src/client/contexts/*"],
+      "utils/*": ["src/client/utils/*"],
+      "constants/*": ["src/client/constants/*"],
+      "services/*": ["src/client/services/*"],
       "hooks/*": ["src/client/hooks/*"]
     }
   },
   "include": ["src", "svg-to-excalidraw.d.ts"],
-  "exclude": ["src/test"]
+  "exclude": ["src/client/test"]
 }
