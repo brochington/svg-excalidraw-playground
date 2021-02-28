@@ -1,36 +1,46 @@
-import React, { FC } from 'react';
-import Staction from 'staction';
+import React, { FC, useContext } from 'react';
+import ReactJson from 'react-json-view'
+import { useStaction, PageState, PageActions, pageActions, PageStoreContext } from './pageStore';
 
 import Button from 'components/Button';
 import SVGEditor from './SVGEditor';
 
-
-const actions = {
-  convert: () => {
-    console.log('convert!!!');
-  }
-}
+const initialState: PageState = {
+  svgString: '',
+  excaliJSON: { excaliJSON: 'goes here' },
+};
 
 const Subheader: FC = () => {
+  const store = useContext(PageStoreContext);
+
   return (
     <div className="flex flex-row h-12">
       <h1>SVG to JSON</h1>
       <div>
-        <Button>Convert</Button>
+        <Button onClick={() => store.actions.convert()}>Convert</Button>
       </div>
     </div>
-  )
-}
+  );
+};
 
 const SVGToJSONPage: React.FC = () => {
+  const pageStore = useStaction<PageState, PageActions>(initialState, pageActions);
+
+  // @ts-ignore
+  window.pageStore = pageStore;
 
   return (
-    <div className="h-screen">
-      <Subheader />
-      <div style={{ height: 'calc(100vh - 48px)'}}>
-        <SVGEditor />
+    <PageStoreContext.Provider value={pageStore}>
+      <div className="h-screen">
+        <Subheader />
+        <div className="flex flex-row" style={{ height: 'calc(100vh - 48px)' }}>
+          <SVGEditor />
+          <div>
+            <ReactJson src={pageStore.state.excaliJSON} />
+          </div>
+        </div>
       </div>
-    </div>
+    </PageStoreContext.Provider>
   );
 };
 

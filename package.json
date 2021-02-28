@@ -21,8 +21,9 @@
     "postcss-loader": "^5.0.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "react-json-view": "^1.21.1",
     "react-router-dom": "^5.2.0",
-    "staction": "^4.2.2"
+    "staction": "4.2.5"
   },
   "devDependencies": {
     "@babel/core": "^7.13.1",
