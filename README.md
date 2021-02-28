@@ -3,6 +3,15 @@
 SVG Excalidraw Playground
 
 
+#### Basic usage
+
+```bash
+$ npm install
+$ npm run dev
+# navigate to localhost:3010/svg-to-json in your browser 
+```
+
+
 ## Pages
 
 ### `/svg-to-json`
