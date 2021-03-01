@@ -8,6 +8,7 @@ import SVGEditor from './SVGEditor';
 const initialState: PageState = {
   svgString: '',
   excaliJSON: { excaliJSON: 'goes here' },
+  svgToExErrorContent: Element | null,
 };
 
 const Subheader: FC = () => {
@@ -36,7 +37,11 @@ const SVGToJSONPage: React.FC = () => {
         <div className="flex flex-row" style={{ height: 'calc(100vh - 48px)' }}>
           <SVGEditor />
           <div>
-            <ReactJson src={pageStore.state.excaliJSON} />
+            {pageStore.state.svgToExErrorContent ? (
+              <div>Error!!</div>
+            ) : (
+              <ReactJson src={pageStore.state.excaliJSON} />
+            )}
           </div>
         </div>
       </div>

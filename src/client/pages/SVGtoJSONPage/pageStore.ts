@@ -1,9 +1,11 @@
 import Staction, { ActionParams } from 'staction';
 import React, { useState } from 'react';
+import svgToEx from 'svg-to-excalidraw';
 
 export type PageState = {
   svgString: string;
   excaliJSON: any; // type this better
+  svgToExErrorContent: Element | null,
 };
 
 type AP = ActionParams<PageState, PageActions>;
@@ -12,9 +14,18 @@ export const pageActions = {
   convert: (params: AP): PageState => {
     const nextState = params.state();
 
-    // call some kinda "convert" method for svg-to-excalidraw here.
-    // Then set it on the state.
-    nextState.excaliJSON = { excaliJSON: 'has been converted' };
+    const { hasErrors, errors, content } = svgToEx.convert(nextState.svgString);
+
+    if (hasErrors) {
+      nextState.svgToExErrorContent = errors;
+      return nextState;
+    }
+
+    nextState.svgToExErrorContent = null;
+
+    console.log('content', content);
+
+    nextState.excaliJSON = content;
 
     return nextState;
   },

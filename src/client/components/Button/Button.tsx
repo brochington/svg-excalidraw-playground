@@ -10,7 +10,7 @@ const Button: React.FC<PropsWithChildren<Props>> = (props: Props) => {
         backgroundColor: 'purple',
         color: 'white',
         borderRadius: '8px',
-        padding: '8px 16px'
+        padding: '6px 14px'
       }}
       {...props} 
     />
