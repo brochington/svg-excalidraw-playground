@@ -10,7 +10,7 @@ const defaultSVG = `<svg width="100pt" height="100pt" version="1.1" viewBox="0 0
 const gAndCircles = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
   <g fill="white" stroke="green" stroke-width="5">
     <circle cx="40" cy="40" r="25" />
-    <circle cx="60" cy="60" r="25" />
+    <circle fill="yellow" stroke="purple" cx="60" cy="60" r="25" />
   </g>
 
   <g fill="blue" stroke="orange" stroke-width="3">
@@ -18,6 +18,12 @@ const gAndCircles = `<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/sv
     <circle cx="40" cy="50" r="12" />
   </g>
 </svg>`;
+
+const useCircleTest = `<svg viewBox="0 0 30 10" xmlns="http://www.w3.org/2000/svg">
+  <circle id="myCircle" cx="5" cy="5" r="4" stroke="blue"/>
+  <use href="#myCircle" x="10" fill="blue"/>
+  <use href="#myCircle" x="20" fill="white" stroke="red"/>
+</svg>`
 
 const auFlag = `<svg xmlns="http://www.w3.org/2000/svg" id="flag-icon-css-au" viewBox="0 0 640 480">
   <path id="path617" fill="#006" stroke-width="1.3" d="M0 0h640v480H0z"/>
@@ -46,6 +52,55 @@ const polyline = `<svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
           fill="none" stroke="black" />
 </svg>`;
 
+const crazytest = `<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="620" height="472">
+<defs>
+ <path id="b" d="m0 0h77v210h-77z" stroke="#000" stroke-width="2"/>
+ <path id="a" d="m0 0h77v60h-77z" stroke="#000" stroke-width="2"/>
+</defs>
+<path d="m0 0h620v472h-620z" fill="#fff"/>
+<g transform="translate(2 1)">
+ <use fill="#fff" xlink:href="#b"/>
+ <use x="77" fill="#ff0" xlink:href="#b"/>
+ <use x="154" fill="#0ff" xlink:href="#b"/>
+ <use x="231" fill="#0f0" xlink:href="#b"/>
+ <use x="308" fill="#f0f" xlink:href="#b"/>
+ <use x="385" fill="red" xlink:href="#b"/>
+ <use x="462" fill="#00f" xlink:href="#b"/>
+ <use x="539" xlink:href="#b"/>
+</g>
+<g transform="translate(2 230)">
+ <use fill="red" xlink:href="#a"/>
+ <use x="77" fill="red" xlink:href="#a"/>
+ <use x="154" fill="#fff" xlink:href="#a"/>
+ <use x="231" fill="#fff" xlink:href="#a"/>
+ <use x="308" fill="red" xlink:href="#a"/>
+ <use x="385" fill="red" xlink:href="#a"/>
+ <use x="462" fill="#fff" xlink:href="#a"/>
+ <use x="539" fill="#fff" xlink:href="#a"/>
+</g>
+<g transform="translate(2 312)">
+ <use fill="#0f0" xlink:href="#a"/>
+ <use x="77" fill="#0f0" xlink:href="#a"/>
+ <use x="154" fill="#0f0" xlink:href="#a"/>
+ <use x="231" fill="#0f0" xlink:href="#a"/>
+ <use x="308" fill="#fff" xlink:href="#a"/>
+ <use x="385" fill="#fff" xlink:href="#a"/>
+ <use x="462" fill="#fff" xlink:href="#a"/>
+ <use x="539" fill="#fff" xlink:href="#a"/>
+</g>
+<g transform="translate(2 392)">
+ <use fill="#00f" xlink:href="#a"/>
+ <use x="77" fill="#fff" xlink:href="#a"/>
+ <use x="154" fill="#00f" xlink:href="#a"/>
+ <use x="231" fill="#fff" xlink:href="#a"/>
+ <use x="308" fill="#00f" xlink:href="#a"/>
+ <use x="385" fill="#fff" xlink:href="#a"/>
+ <use x="462" fill="#00f" xlink:href="#a"/>
+ <use x="539" fill="#fff" xlink:href="#a"/>
+</g>
+<text font-family="DejaVu Sans" stroke-width="4" x="310" y="174.47" font-size="180" text-anchor="middle">TEST</text>
+</svg>`
+
 const SVGEditor: FC = () => {
   const pageStore = useContext(PageStoreContext);
   const monacoRef = useRef<HTMLDivElement>(null);
@@ -57,12 +112,15 @@ const SVGEditor: FC = () => {
       // value: gAndCircles,
       // value: defaultSVG,
       // value: tempRect,
-      value: polyline,
+      // value: polyline,
+      // value: crazytest,
+      value: useCircleTest,
       language: 'html',
     });
 
     // pageStore.actions.setSVGString(tempRect);
-    pageStore.actions.setSVGString(polyline);
+    // pageStore.actions.setSVGString(gAndCircles);
+    pageStore.actions.setSVGString(useCircleTest);
 
     editor.onKeyUp(() => {
       const svgString = editor.getValue();
